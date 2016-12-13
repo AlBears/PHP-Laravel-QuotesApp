@@ -9,18 +9,27 @@
 @endsection
 
 @section('content')
+
   <section class="quotes">
     <h1>Latest Quotes</h1>
-    <article class="quote">
-      <div class="delete"><a href=""></a></div>
-      Quote text
-      <div class="info">Created by <a href="#">Alb</a>on...</div>
-    </article>
-    Pagination
+    @for($i = 0; $i < count($quotes); $i++)
+      <article class="quote">
+        <div class="delete"><a href="">x</a></div>
+          {{ $quotes[$i]->quote }}
+        <div class="info">Created by <a href="#">{{ $quotes[$i]->author->name }}</a> on {{ $quotes[$i]->created_at }}</div>
+      </article>
+    @endfor
+
+    <div class="pagination">
+      Pagination
+    </div>
+
   </section>
+
   <section class="edit-quote">
     <h1>Add A Quote</h1>
-    <form>
+
+    <form method="post" action="{{route('create')}}">
       <div class="input-group">
         <label for="author">Your Name</label>
         <input type="text" name="author" id="author" placeholder="Your Name"/>
@@ -32,5 +41,6 @@
       <button type="submit" class="btn">Submit Quote</button>
       <input type="hidden" name="_token" value="{{ Session::token() }}">
     </form>
+
   </section>
 @endsection
