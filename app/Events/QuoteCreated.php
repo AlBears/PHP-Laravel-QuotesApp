@@ -20,7 +20,8 @@ class QuoteCreated
      */
     public function __construct($author)
     {
-        $this->author = $author->name;
+        $this->author_name = $author->name;
+        $this->author_email = $author->email;
     }
 
     /**
